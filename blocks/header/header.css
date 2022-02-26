@@ -1,0 +1,16 @@
+.header {
+  padding-top: 45px;
+  position: relative;
+  display: flex;
+  max-width: 880px;
+  justify-content: start;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+@media (max-width: 320px) {
+  .header{
+    padding-top: 28px;
+    display: block;
+  }
+}

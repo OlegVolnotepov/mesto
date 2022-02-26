@@ -1,0 +1,10 @@
+.profile__info_line {
+  display: flex;
+  gap: 18px;
+}
+
+@media (max-width: 920px) {
+  .profile__info_line {
+    gap: 10px;
+  }
+}
