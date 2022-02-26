@@ -6,5 +6,7 @@
 @media (max-width: 920px) {
   .header__logo {
     margin-left: 27px;
+    width: 103px;
+;
   }
 }
