@@ -8,6 +8,13 @@
 
 @media (max-width: 920px) {
   .profile {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+}
+
+@media (max-width: 760px) {
+  .profile {
     flex-direction: column;
     margin-top: 38px;
   }

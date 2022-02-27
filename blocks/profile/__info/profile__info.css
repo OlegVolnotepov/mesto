@@ -3,7 +3,7 @@
   margin-left: 15px;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 760px) {
   .profile__info {
     display: flex;
     flex-direction: column;

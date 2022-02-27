@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 760px) {
   .profile__about {
     margin: auto;
     max-width: 222px;
