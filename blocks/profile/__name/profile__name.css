@@ -12,7 +12,7 @@
 
 }
 
-@media (max-width: 360px) {
+@media (max-width: 440px) {
   .profile__name {
     margin: auto;
     max-width: 222px;

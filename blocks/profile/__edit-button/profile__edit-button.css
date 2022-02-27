@@ -8,7 +8,7 @@
   background: transparent;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 440px) {
   .profile__edit-button {
     display: block;
     padding: 0;

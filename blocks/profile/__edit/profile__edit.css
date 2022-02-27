@@ -10,7 +10,7 @@
   transition: .3s;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 440px) {
   .profile__edit {
     margin: auto;
     position: absolute;
