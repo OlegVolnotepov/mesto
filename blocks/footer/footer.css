@@ -10,10 +10,6 @@
   padding-bottom: 60px;
 }
 
-.footer p {
-  margin: 0;
-}
-
 @media (max-width: 880px) {
   .footer {
     max-width: 581px;
@@ -32,5 +28,7 @@
     margin-right: 19px;
     margin-top: 48px;
     padding-bottom: 36px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

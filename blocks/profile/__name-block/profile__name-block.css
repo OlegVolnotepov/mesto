@@ -1,10 +1,10 @@
-.profile__info-line {
+.profile__name-block {
   display: flex;
   gap: 18px;
 }
 
 @media (max-width: 920px) {
-  .profile__info-line {
+  .profile__name-block {
     gap: 10px;
   }
 }

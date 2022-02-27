@@ -1,4 +1,4 @@
-.profile__button {
+.profile__edit-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 320px) {
-  .profile__button {
+  .profile__edit-button {
     display: block;
     padding: 0;
   }

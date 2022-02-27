@@ -1,10 +1,10 @@
-let popup = document.querySelector('.popup');
-let editbutton = document.querySelector('.profile__edit');
-let closeButton = document.querySelector('.popup__close');
-let popupName = document.getElementById('name');
-let popupAbout = document.getElementById('about');
-let name = document.querySelector('.profile__name');
-let about = document.querySelector('.profile__about');
+const popup = document.querySelector('.popup');
+const editbutton = document.querySelector('.profile__edit');
+const closeButton = document.querySelector('.popup__close');
+const popupName = document.getElementById('name');
+const popupAbout = document.getElementById('about');
+const name = document.querySelector('.profile__name');
+const about = document.querySelector('.profile__about');
 
 function showPopup() {
   popupName.setAttribute('value', name.textContent);
