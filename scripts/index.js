@@ -1,9 +1,8 @@
 let popup = document.querySelector('.popup');
-let editbutton = document.querySelector('.porfile__button');
+let editbutton = document.querySelector('.profile__edit');
 let closeButton = document.querySelector('.popup__close');
 let popupName = document.getElementById('name');
 let popupAbout = document.getElementById('about');
-
 let name = document.querySelector('.profile__name');
 let about = document.querySelector('.profile__about');
 
@@ -23,21 +22,15 @@ popup.addEventListener('click', function(event) {
   }
 })
 
-
 function formSubmitHandler (evt) {
   evt.preventDefault(); 
-
   // Получите значение полей Input и из свойства value
   let inputName = popupName.value
   let inputAbout = popupAbout.value
-  console.log(inputAbout)
-
   //вставляем на страницу новые значения
   name.textContent = inputName
   about.textContent = inputAbout
-
   popup.classList.toggle('popup_opened');
-  
 }
 
 popup.addEventListener('submit', formSubmitHandler); 
