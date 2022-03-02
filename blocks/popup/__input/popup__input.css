@@ -5,8 +5,9 @@
   border: 0;
   width: 83.2%;
   border-bottom: 1px solid #d6d1d1;
-  line-height: 1.8;
+  line-height: 1.5;
   margin-top: 54px;
+  font-size: 14px;
 }
 
 .popup__input:nth-child(3){
@@ -18,5 +19,6 @@
     margin-left: 22px;
     margin-right: 22px;
     margin-top: 75px;
+    line-height: 1.7;
   }
 }

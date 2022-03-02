@@ -5,7 +5,7 @@
   border-radius: 10px;
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 520px;
   right: 0;
   left: 0;
   margin: auto;
@@ -17,5 +17,6 @@
   .popup__form {
     width: 282px;
     height: 322px;
+    bottom: 170px;
   }
 }

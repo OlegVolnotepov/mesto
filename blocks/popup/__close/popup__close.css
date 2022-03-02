@@ -4,8 +4,8 @@
   outline: none; /* Для синий ободки */
   background: transparent;
   position: relative;
-  right: -102%;
-  top: -99%;
+  right: -100%;
+  top: -98%;
 }
 
 .popup__close:hover {
@@ -16,7 +16,7 @@
 @media (max-width: 530px) {
   .popup__close {
     right: -90%;
-    top: -107%;
+    top: -102%;
   }
 }
 
