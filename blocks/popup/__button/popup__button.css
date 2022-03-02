@@ -1,4 +1,5 @@
 .popup__button {
+  display: block;
   padding: 0;
   margin: 0 auto;
   margin-top: 48px;
@@ -11,7 +12,7 @@
   line-height: 22px;
   text-align: center;
   color: #FFFFFF;
-  width: 100%;
+  width: 83.2%;
   height: 50px;
   cursor: pointer;
 }
@@ -23,6 +24,7 @@
 
 @media (max-width: 530px) {
   .popup__button {
+    margin-top: 45px;
     font-size: 14px;
     line-height: 17px;
   }
