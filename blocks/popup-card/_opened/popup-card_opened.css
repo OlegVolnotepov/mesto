@@ -1,0 +1,5 @@
+.popup-card_opened {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
