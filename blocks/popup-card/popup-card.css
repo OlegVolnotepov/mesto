@@ -1,5 +1,9 @@
 .popup-card {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
   position: fixed;
   top: 0;
   bottom: 0;

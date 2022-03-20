@@ -13,6 +13,9 @@ const cardAddCloseButton = document.querySelector('.popup-card__close');
 const cardSubmitButton = document.querySelector('.popup-card__button');
 const cardTitle = document.getElementById('card-title');
 const cardUrl = document.getElementById('card-url');
+const imgCloseButton = document.querySelector('.popup-img__close');
+
+const popupImg = document.querySelector('.popup-img');
 
 
 //Открытие и закрытие попапа редактирования информации - событие
@@ -27,6 +30,18 @@ cardAddCloseButton.addEventListener('click', showPopupCard);
 popup.addEventListener('click', function(event) {
   if(event.target === event.currentTarget) {
     popup.classList.toggle('popup_opened');
+  }
+})
+
+popupImg.addEventListener('click', function(event) {
+  if(event.target === event.currentTarget) {
+    popupImg.classList.toggle('popup-img_opened');
+  }
+})
+
+popupCard.addEventListener('click', function(event) {
+  if(event.target === event.currentTarget) {
+    popupCard.classList.toggle('popup-card_opened');
   }
 })
 
@@ -96,6 +111,25 @@ function delCard(evt) {
   cardForRemove.remove();
 }
 
+//Функция открытия изображения
+function openImg(evt) {
+  let targetImg = evt.currentTarget.closest('.elements__img').src;
+  let targetTitle = evt.currentTarget.closest('.elements__img').alt
+  const popupImg = document.querySelector('.popup-img');
+  document.querySelector('.popup-img__img').src = targetImg;
+  document.querySelector('.popup-img__title').textContent = targetTitle;
+  popupImg.classList.toggle('popup-img_opened');
+}
+
+//Функция закрытия попапа изображения
+function closeImg(){
+  const popupImg = document.querySelector('.popup-img');
+  popupImg.classList.toggle('popup-img_opened');
+}
+
+//Закрытие попапа изображения
+imgCloseButton.addEventListener('click', closeImg )
+
 //Рендер карточек на странице
 // initialCards.forEach((i) => {
 //   let card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
@@ -114,12 +148,17 @@ function renderNewCard(evt) {
   const card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
   card.querySelector('.elements__img').src = inputUrl;
   card.querySelector('.elements__title').textContent = inputTitle;
+  card.querySelector('.elements__img').alt = inputTitle;
   const likeButton = card.querySelector('.elements__like');
   likeButton.addEventListener('click', like);
 
   //Удаление карточки
   const delButton = card.querySelector('.elements__trash');
   delButton.addEventListener('click', delCard);
+
+  //Открытие изображения
+  const openCard = card.querySelector('.elements__img')
+  openCard.addEventListener('click', openImg);
 
   addCard.prepend(card);
   showPopupCard();
@@ -136,12 +175,17 @@ function renderCard(link, name) {
   let card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
   card.querySelector('.elements__img').src = link; // наполняем содержимым
   card.querySelector('.elements__title').textContent = name; // наполняем содержимым
+  card.querySelector('.elements__img').alt = name; // наполняем содержимым
   const likeButton = card.querySelector('.elements__like');
   likeButton.addEventListener('click', like);
 
   //Удаление карточки
   const delButton = card.querySelector('.elements__trash');
   delButton.addEventListener('click', delCard);
+
+  //Открытие изображения
+  const openCard = card.querySelector('.elements__img');
+  openCard.addEventListener('click', openImg);
 
   addCard.append(card); // отображаем на странице
  }

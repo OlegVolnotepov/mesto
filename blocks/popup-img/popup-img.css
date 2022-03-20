@@ -1,5 +1,7 @@
 .popup-img {
   display: flex;
+  opacity: 0;
+  visibility: hidden;
   justify-content: center;
   align-items: center;
   position: fixed;
