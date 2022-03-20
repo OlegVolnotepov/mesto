@@ -12,9 +12,10 @@
   background-color: inherit;
   background-position: center;
   cursor: pointer;
+  filter: drop-shadow(0 0 0.9rem black);
 }
 
 .elements__trash:hover {
-  filter: opacity(0.5);
-  transition: 0.3s;
+  filter: drop-shadow(0 0 0.9rem black) opacity(0.5);
+  transition: 0.4s;
 }

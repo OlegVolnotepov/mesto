@@ -6,7 +6,7 @@ const popupName = document.getElementById('name');
 const popupAbout = document.getElementById('about');
 const name = document.querySelector('.profile__name');
 const about = document.querySelector('.profile__about');
-const elementsCard = document.querySelector('#elements__card').content; //карточка места
+const elementsCard = document.querySelector('#elements__card').content;
 const addCard = document.querySelector('.elements');
 const cardAddButton = document.querySelector('.profile__add-button');
 const cardAddCloseButton = document.querySelector('.popup-card__close');
@@ -14,9 +14,7 @@ const cardSubmitButton = document.querySelector('.popup-card__button');
 const cardTitle = document.getElementById('card-title');
 const cardUrl = document.getElementById('card-url');
 const imgCloseButton = document.querySelector('.popup-img__close');
-
 const popupImg = document.querySelector('.popup-img');
-
 
 //Открытие и закрытие попапа редактирования информации - событие
 editbutton.addEventListener('click', showPopup);
@@ -61,17 +59,16 @@ function showPopupCard() {
 function formSubmitHandler (evt) {
   evt.preventDefault();
   // Получите значение полей Input из свойства value
-  let inputName = popupName.value
-  let inputAbout = popupAbout.value
+  let inputName = popupName.value;
+  let inputAbout = popupAbout.value;
   //вставляем на страницу новые значения
-  name.textContent = inputName
-  about.textContent = inputAbout
+  name.textContent = inputName;
+  about.textContent = inputAbout;
   popup.classList.toggle('popup_opened');
 }
 
 //Кнопка отправки новой информации - событие
 popup.addEventListener('submit', formSubmitHandler);
-
 
 const initialCards = [
   {
@@ -107,14 +104,14 @@ function like(evt) {
 
 //Функция удаления
 function delCard(evt) {
-  const cardForRemove = evt.currentTarget.closest('.elements__card')
+  const cardForRemove = evt.currentTarget.closest('.elements__card');
   cardForRemove.remove();
 }
 
 //Функция открытия изображения
 function openImg(evt) {
   let targetImg = evt.currentTarget.closest('.elements__img').src;
-  let targetTitle = evt.currentTarget.closest('.elements__img').alt
+  let targetTitle = evt.currentTarget.closest('.elements__img').alt;
   const popupImg = document.querySelector('.popup-img');
   document.querySelector('.popup-img__img').src = targetImg;
   document.querySelector('.popup-img__title').textContent = targetTitle;
@@ -128,16 +125,7 @@ function closeImg(){
 }
 
 //Закрытие попапа изображения
-imgCloseButton.addEventListener('click', closeImg )
-
-//Рендер карточек на странице
-// initialCards.forEach((i) => {
-//   let card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
-//   card.querySelector('.elements__img').src = i.link; // наполняем содержимым
-//   card.querySelector('.elements__title').textContent = i.name; // наполняем содержимым
-//   addCard.append(card); // отображаем на странице
-//   like()
-// })
+imgCloseButton.addEventListener('click', closeImg );
 
 //Функция добавления новой карточки на страницу
 function renderNewCard(evt) {
@@ -145,7 +133,7 @@ function renderNewCard(evt) {
   // Получите значение полей Input из свойства value
   const inputUrl = cardUrl.value;
   const inputTitle = cardTitle.value;
-  const card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
+  const card = elementsCard.querySelector('.elements__card').cloneNode(true);
   card.querySelector('.elements__img').src = inputUrl;
   card.querySelector('.elements__title').textContent = inputTitle;
   card.querySelector('.elements__img').alt = inputTitle;
@@ -167,32 +155,23 @@ function renderNewCard(evt) {
 //Отправка карточки на страницу - событие
 popupCard.addEventListener('submit', renderNewCard);
 
-
-
-//тестирую добавление карточек из массива через функцию
-
+//Добавление карточек из массива через функцию
 function renderCard(link, name) {
-  let card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
+  const card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
   card.querySelector('.elements__img').src = link; // наполняем содержимым
-  card.querySelector('.elements__title').textContent = name; // наполняем содержимым
-  card.querySelector('.elements__img').alt = name; // наполняем содержимым
+  card.querySelector('.elements__title').textContent = name;
+  card.querySelector('.elements__img').alt = name;
   const likeButton = card.querySelector('.elements__like');
   likeButton.addEventListener('click', like);
-
   //Удаление карточки
   const delButton = card.querySelector('.elements__trash');
   delButton.addEventListener('click', delCard);
-
   //Открытие изображения
   const openCard = card.querySelector('.elements__img');
   openCard.addEventListener('click', openImg);
-
   addCard.append(card); // отображаем на странице
  }
 
 initialCards.forEach((item) => {
-  renderCard(item.link, item.name)
+  renderCard(item.link, item.name);
 })
-
-
-//Открытие попапа
