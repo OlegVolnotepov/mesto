@@ -46,14 +46,14 @@ const initialCards = [
 ];
 
 //Открытие и закрытие попапа редактирования информации - событие
-editButton.addEventListener('click', openPopup);
+editButton.addEventListener('click', () => openPopup(profilePopup));
 profileCloseButton.addEventListener('click', closePopup);
 
 //Закрытие попапа изображения
 imgCloseButton.addEventListener('click', closePopup);
 
 //Открытие и закрытие попапа добавления карточки - событие
-cardAddButton.addEventListener('click', openPopup );
+cardAddButton.addEventListener('click', () => openPopup(popupCard));
 cardAddCloseButton.addEventListener('click', closePopup);
 
 //Закрытие попапа при клике за пределами - событие
@@ -75,25 +75,12 @@ popupCard.addEventListener('click', function(evt) {
   }
 })
 
-//Функция открытия попапа
-function openPopup (evt) {
-  if (evt.currentTarget.closest('button').classList.contains('profile__add-button')){
-    popupCard.classList.toggle('popup_opened');
-  }
-  if (evt.currentTarget.closest('button').classList.contains('profile__edit-button')){
-    popupName.setAttribute('value', name.textContent);
-    popupAbout.setAttribute('value', about.textContent);
-    profilePopup.classList.toggle('popup_opened');
-  }
-}
-
-//Функция закрытия попаов
-function handleCloseButtonClick(popup) {
-  popup.classList.remove('popup_opened');
-}
-
 function closePopup(evt) {
-  handleCloseButtonClick(evt.target.closest('.popup'));
+    evt.currentTarget.closest('.popup').classList.remove('popup_opened');
+  }
+
+function openPopup(currentPopup) {
+  currentPopup.classList.toggle('popup_opened');
 }
 
 //Функция обработки формы редактирования
