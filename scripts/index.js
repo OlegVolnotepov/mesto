@@ -144,8 +144,7 @@ function renderNewCard(evt) {
   evt.preventDefault();
   addCard.prepend(createCard(cardUrl.value, cardTitle.value));
   closePopup(popupCard);
-  cardUrl.value = '';
-  cardTitle.value = '';
+  evt.target.reset()
 }
 
 //Отправка карточки на страницу - событие
@@ -153,7 +152,6 @@ popupCard.addEventListener('submit', renderNewCard);
 
 //Добавление карточек из массива через функцию
 function renderCard(link, name) {
-  const card = elementsCard.querySelector('.elements__card').cloneNode(true); // клонируем содержимое тега template
   addCard.append(createCard(link, name)); // отображаем на странице
  }
 
