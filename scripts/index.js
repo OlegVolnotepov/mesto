@@ -47,37 +47,38 @@ const initialCards = [
 
 //Открытие и закрытие попапа редактирования информации - событие
 editButton.addEventListener('click', () => openPopup(profilePopup));
-profileCloseButton.addEventListener('click', closePopup);
+profileCloseButton.addEventListener('click', () => closePopup(profilePopup));
 
 //Закрытие попапа изображения
-imgCloseButton.addEventListener('click', closePopup);
+imgCloseButton.addEventListener('click', () => closePopup(popupImgSection));
 
 //Открытие и закрытие попапа добавления карточки - событие
 cardAddButton.addEventListener('click', () => openPopup(popupCard));
-cardAddCloseButton.addEventListener('click', closePopup);
+cardAddCloseButton.addEventListener('click', () => closePopup(popupCard));
 
 //Закрытие попапа при клике за пределами - событие
 profilePopup.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
-    closePopup(evt);
+    closePopup(profilePopup);
   }
 })
 
 popupImgSection.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
-    closePopup(evt);
+    closePopup(popupImgSection);
   }
 })
 
 popupCard.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
-    closePopup(evt);
+    closePopup(popupCard);
   }
 })
 
-function closePopup(evt) {
-    evt.currentTarget.closest('.popup').classList.remove('popup_opened');
-  }
+function closePopup(popup) {
+  console.log(popup)
+  popup.classList.remove('popup_opened');
+}
 
 function openPopup(currentPopup) {
   currentPopup.classList.add('popup_opened');
@@ -92,7 +93,7 @@ function handleProfileFormSubmit(evt) {
   //вставляем на страницу новые значения
   name.textContent = inputName;
   about.textContent = inputAbout;
-  closePopup(evt);
+  closePopup(profilePopup);
 }
 
 //Кнопка отправки новой информации - событие
@@ -134,10 +135,11 @@ function createCard(link, name) {
   elementsImg.addEventListener('click', () => openImg(link , name));
   return card;
 }
+
 function renderNewCard(evt) {
   evt.preventDefault();
   addCard.prepend(createCard(cardUrl.value, cardTitle.value));
-  popupCard.classList.remove('popup_opened');
+  closePopup(popupCard);
   cardUrl.value = '';
   cardTitle.value = '';
 }
