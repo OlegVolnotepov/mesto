@@ -59,19 +59,19 @@ cardAddCloseButton.addEventListener('click', closePopup);
 //Закрытие попапа при клике за пределами - событие
 profilePopup.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
-    profilePopup.classList.toggle('popup_opened');
+    closePopup(evt);
   }
 })
 
 popupImgSection.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
-    popupImgSection.classList.toggle('popup_opened');
+    closePopup(evt);
   }
 })
 
 popupCard.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
-    popupCard.classList.toggle('popup_opened');
+    closePopup(evt);
   }
 })
 
@@ -80,7 +80,7 @@ function closePopup(evt) {
   }
 
 function openPopup(currentPopup) {
-  currentPopup.classList.toggle('popup_opened');
+  currentPopup.classList.add('popup_opened');
 }
 
 //Функция обработки формы редактирования
@@ -92,7 +92,7 @@ function handleProfileFormSubmit(evt) {
   //вставляем на страницу новые значения
   name.textContent = inputName;
   about.textContent = inputAbout;
-  profilePopup.classList.toggle('popup_opened');
+  closePopup(evt);
 }
 
 //Кнопка отправки новой информации - событие
@@ -114,7 +114,7 @@ function openImg(link, name) {
   popupImg.src = link;
   popupImgTitle.textContent = name;
   popupImg.alt = name;
-  popupImgSection.classList.toggle('popup_opened');
+  openPopup(popupImgSection);
 }
 
 function createCard(link, name) {
@@ -154,6 +154,3 @@ function renderCard(link, name) {
 initialCards.forEach((item) => {
   renderCard(item.link, item.name);
 })
-
-
-
