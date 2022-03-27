@@ -46,7 +46,11 @@ const initialCards = [
 ];
 
 //Открытие и закрытие попапа редактирования информации - событие
-editButton.addEventListener('click', () => openPopup(profilePopup));
+editButton.addEventListener('click', () => {
+  popupName.setAttribute('value', name.textContent);
+  popupAbout.setAttribute('value', about.textContent);
+  openPopup(profilePopup);
+});
 profileCloseButton.addEventListener('click', () => closePopup(profilePopup));
 
 //Закрытие попапа изображения
