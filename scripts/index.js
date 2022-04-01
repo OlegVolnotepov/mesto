@@ -158,3 +158,12 @@ function renderCard(link, name) {
 initialCards.forEach((item) => {
   renderCard(item.link, item.name);
 })
+
+
+document.addEventListener('mousedown', function(evt) {
+  // const targetClick = evt.target.attributes.href
+  // console.log(targetClick.toString())
+if(evt.target.attributes.href.indexOf("catalog") > -1){
+  scrollTop();
+} else {console.log('no')};
+})
