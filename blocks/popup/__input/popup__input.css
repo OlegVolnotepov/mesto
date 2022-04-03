@@ -10,9 +10,9 @@
   font-size: 14px;
 }
 
-.popup__input:nth-child(3){
+/* .popup__input:nth-child(3){
   margin-top: 30px;
-}
+} */
 
 @media (max-width: 530px) {
   .popup__input {
@@ -21,4 +21,7 @@
     margin-top: 75px;
     line-height: 1.7;
   }
+}
+.popup__input_url {
+  margin-top: 30px;
 }

@@ -50,6 +50,7 @@ editButton.addEventListener('click', () => {
   popupName.setAttribute('value', name.textContent);
   popupAbout.setAttribute('value', about.textContent);
   openPopup(profilePopup);
+  document.addEventListener('keydown', (evt) => closeEsc(evt, profilePopup));
 });
 profileCloseButton.addEventListener('click', () => closePopup(profilePopup));
 
@@ -57,7 +58,11 @@ profileCloseButton.addEventListener('click', () => closePopup(profilePopup));
 imgCloseButton.addEventListener('click', () => closePopup(popupImgSection));
 
 //Открытие и закрытие попапа добавления карточки - событие
-cardAddButton.addEventListener('click', () => openPopup(popupCard));
+cardAddButton.addEventListener('click', () => {
+  openPopup(popupCard);
+  document.addEventListener('keydown', (evt) => closeEsc(evt, popupCard));
+
+});
 cardAddCloseButton.addEventListener('click', () => closePopup(popupCard));
 
 //Закрытие попапа при клике за пределами - событие
@@ -73,6 +78,15 @@ popupImgSection.addEventListener('click', function(evt) {
   }
 })
 
+
+//Функция закрытия по Esc
+function closeEsc(evt, popup) {
+  if(evt.key === 'Escape') {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', (evt) => closeEsc(evt, popup))
+  }
+}
+
 popupCard.addEventListener('click', function(evt) {
   if(evt.target === evt.currentTarget) {
     closePopup(popupCard);
@@ -80,7 +94,6 @@ popupCard.addEventListener('click', function(evt) {
 })
 
 function closePopup(popup) {
-  console.log(popup)
   popup.classList.remove('popup_opened');
 }
 
@@ -120,6 +133,7 @@ function openImg(link, name) {
   popupImgTitle.textContent = name;
   popupImg.alt = name;
   openPopup(popupImgSection);
+  document.addEventListener('keydown', (evt) => closeEsc(evt, popupImgSection));
 }
 
 function createCard(link, name) {
