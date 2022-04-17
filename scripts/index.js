@@ -38,7 +38,6 @@ imgCloseButton.addEventListener('click', () => closePopup(popupImgSection));
 //Открытие и закрытие попапа добавления карточки - событие
 cardAddButton.addEventListener('click', () => {
   openPopup(popupCard);
-
 });
 cardAddCloseButton.addEventListener('click', () => closePopup(popupCard));
 
@@ -146,8 +145,10 @@ cardForm.addEventListener('submit', renderNewCard);
 //Добавление карточек из массива через функцию
 function renderCard(link, name) {
   addCard.append(createCard(link, name));
- }
+}
 
 initialCards.forEach((item) => {
   renderCard(item.link, item.name);
 })
+
+
