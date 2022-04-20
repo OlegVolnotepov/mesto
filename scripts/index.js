@@ -1,3 +1,8 @@
+// import { FormValidator } from './FormValidator'
+import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+import { initialCards } from './cards.js'
+
 const profilePopup = document.querySelector('.profile-popup');
 const profileForm = document.querySelector('.popup__form');
 const cardForm = document.querySelector('.popup__form-card');
@@ -12,18 +17,21 @@ const elementsCard = document.querySelector('#elements__card').content;
 const addCard = document.querySelector('.elements');
 const cardAddButton = document.querySelector('.profile__add-button');
 const cardAddCloseButton = document.querySelector('.popup-card__close');
-const cardSubmitButton = document.querySelector('.popup-card__button');
 const cardTitle = document.getElementById('card-title');
 const cardUrl = document.getElementById('card-url');
 const imgCloseButton = document.querySelector('.popup-img__close');
 const popupImgSection = document.querySelector('.popup-img');
 const popupImg = document.querySelector('.popup-img__img');
-const popupImgTitle = document.querySelector('.popup-img__title')
+const popupImgTitle = document.querySelector('.popup-img__title');
+const card = elementsCard.querySelector('.elements__card');
+const allForms = document.querySelectorAll('.popup__form');
 
 //Открытие и закрытие попапа редактирования информации - событие
 editButton.addEventListener('click', () => {
   popupName.value = name.textContent;
   popupAbout.value= about.textContent;
+  const formValidate = new FormValidator(config, profileForm);
+  formValidate.enableValidation();
   openPopup(profilePopup);
 });
 
@@ -37,9 +45,16 @@ imgCloseButton.addEventListener('click', () => closePopup(popupImgSection));
 
 //Открытие и закрытие попапа добавления карточки - событие
 cardAddButton.addEventListener('click', () => {
+  cardTitle.value = '';
+  cardUrl.value = '';
+  const formValidate = new FormValidator(config, cardForm);
+  formValidate.enableValidation();
   openPopup(popupCard);
 });
-cardAddCloseButton.addEventListener('click', () => closePopup(popupCard));
+
+cardAddCloseButton.addEventListener('click', () => {
+  closePopup(popupCard);
+})
 
 //Закрытие попапа при клике за пределами - событие
 profilePopup.addEventListener('click', function(evt) {
@@ -111,44 +126,31 @@ function openImg(link, name) {
   openPopup(popupImgSection);
 }
 
-function createCard(link, name) {
-  const inputUrl = link;
-  const inputTitle = name;
-  const card = elementsCard.querySelector('.elements__card').cloneNode(true);
-  const elementsImg = card.querySelector('.elements__img')
-  elementsImg.src = inputUrl;
-  card.querySelector('.elements__title').textContent = inputTitle;
-  elementsImg.alt = inputTitle;
-  const likeButton = card.querySelector('.elements__like');
-  likeButton.addEventListener('click', like);
-  //блокирование сабмита после добавления карточки
-  cardSubmitButton.classList.add('popup__button_disabled');
-  cardSubmitButton.setAttribute('disabled', 'disabled');
-  //Удаление карточки
-  const delButton = card.querySelector('.elements__trash');
-  delButton.addEventListener('click', deleteCard);
-  //Открытие изображения
-  elementsImg.addEventListener('click', () => openImg(link , name));
-  return card;
-}
-
-function renderNewCard(evt) {
-  evt.preventDefault();
-  addCard.prepend(createCard(cardUrl.value, cardTitle.value));
-  closePopup(popupCard);
-  evt.target.reset()
-}
-
-//Отправка карточки на страницу - событие
-cardForm.addEventListener('submit', renderNewCard);
-
-//Добавление карточек из массива через функцию
-function renderCard(link, name) {
-  addCard.append(createCard(link, name));
+const config =
+  {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButton: '.popup__button',
+    submitDisable: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_error'
 }
 
 initialCards.forEach((item) => {
-  renderCard(item.link, item.name);
+  const cardTab = new Card(item.name, item.link, card);
+  cardTab.renderCard(addCard);
+})
+
+//Отправка карточки на страницу - событие
+cardForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const newCard = new Card(cardTitle.value, cardUrl.value, card);
+  newCard.renderCard(addCard);
+  closePopup(popupCard);
+});
+
+allForms.forEach((form) => {
+  const formValidate = new FormValidator(config, form);
+  formValidate.enableValidation();
 })
 
 
