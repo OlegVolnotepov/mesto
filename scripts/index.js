@@ -3,6 +3,15 @@ import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
 import { initialCards } from './cards.js'
 
+const config =
+  {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButton: '.popup__button',
+    submitDisable: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_error'
+}
+
 const profilePopup = document.querySelector('.profile-popup');
 const profileForm = document.querySelector('.popup__form');
 const cardForm = document.querySelector('.popup__form-card');
@@ -25,13 +34,15 @@ const popupImg = document.querySelector('.popup-img__img');
 const popupImgTitle = document.querySelector('.popup-img__title');
 const card = elementsCard.querySelector('.elements__card');
 const allForms = document.querySelectorAll('.popup__form');
+const profileValidate = new FormValidator(config, profileForm);
+const formValidate = new FormValidator(config, cardForm);
 
 //Открытие и закрытие попапа редактирования информации - событие
+
 editButton.addEventListener('click', () => {
   popupName.value = name.textContent;
   popupAbout.value= about.textContent;
-  const formValidate = new FormValidator(config, profileForm);
-  formValidate.enableValidation();
+  profileValidate.resetValidation();
   openPopup(profilePopup);
 });
 
@@ -47,8 +58,7 @@ imgCloseButton.addEventListener('click', () => closePopup(popupImgSection));
 cardAddButton.addEventListener('click', () => {
   cardTitle.value = '';
   cardUrl.value = '';
-  const formValidate = new FormValidator(config, cardForm);
-  formValidate.enableValidation();
+  formValidate.disableSubmit();
   openPopup(popupCard);
 });
 
@@ -104,19 +114,8 @@ function handleProfileFormSubmit(evt) {
   closePopup(profilePopup);
 }
 
-//Кнопка отправки новой информации - событие
+//Кнопка отправки новой информации
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-
-//Функция лайка
-function like(evt) {
-  evt.target.classList.toggle('elements__like_active');
-}
-
-//Функция удаления
-function deleteCard(evt) {
-  const cardForRemove = evt.currentTarget.closest('.elements__card');
-  cardForRemove.remove();
-}
 
 //Функция открытия изображения
 function openImg(link, name) {
@@ -126,25 +125,16 @@ function openImg(link, name) {
   openPopup(popupImgSection);
 }
 
-const config =
-  {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButton: '.popup__button',
-    submitDisable: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_error'
-}
-
 initialCards.forEach((item) => {
-  const cardTab = new Card(item.name, item.link, card);
-  cardTab.renderCard(addCard);
+  const cardTab = new Card(item.name, item.link, card, openImg);
+  addCard.append(cardTab.renderCard());
 })
 
-//Отправка карточки на страницу - событие
+//Отправка карточки на страницу
 cardForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const newCard = new Card(cardTitle.value, cardUrl.value, card);
-  newCard.renderCard(addCard);
+  const newCard = new Card(cardTitle.value, cardUrl.value, card, openImg);
+  addCard.prepend(newCard.renderCard());
   closePopup(popupCard);
 });
 

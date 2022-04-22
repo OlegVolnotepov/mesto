@@ -13,6 +13,22 @@ export class FormValidator {
     }
   }
 
+  disableSubmit = () => {
+    this._form.querySelector(this._config.submitButton).classList.add(this._config.submitDisable);
+  }
+
+  resetValidation = () => {
+    const submitButton = this._form.querySelector(this._config.submitButton);
+    this._form.querySelectorAll('.popup__error').forEach((item) => {
+      item.textContent = '';
+    })
+    this._form.querySelectorAll('.popup__input').forEach((item) => {
+      item.classList.remove(this._config.inputErrorClass);
+    })
+    submitButton.classList.remove(this._config.submitDisable);
+    submitButton.removeAttribute('disabled', 'disabled');
+  }
+
   _setFieldError = (input) => {
     const errorSpan = document.querySelector(`.${input.getAttribute('id')}-error`);
     errorSpan.textContent = input.validationMessage;
