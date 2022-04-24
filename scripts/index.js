@@ -125,20 +125,22 @@ function openImg(link, name) {
   openPopup(popupImgSection);
 }
 
-function newCard(title, link, card, openImg) {
+function createCard(title, link, card, openImg) {
   const newCard = new Card(title, link, card, openImg);
-  addCard.prepend(newCard.renderCard());
+  return newCard
 }
 
-initialCards.reverse().forEach((item) => {
-  newCard(item.name, item.link, card, openImg);
+initialCards.forEach((item) => {
+  const cardObject = createCard(item.name, item.link, card, openImg);
+  addCard.append(cardObject.renderCard());
 })
 
 //Отправка карточки на страницу
 cardForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  newCard(cardTitle.value, cardUrl.value, card, openImg);
+  const cardObject = createCard(cardTitle.value, cardUrl.value, card, openImg);
   closePopup(popupCard);
+  addCard.prepend(cardObject.renderCard());
 });
 
 allForms.forEach((form) => {
