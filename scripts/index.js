@@ -125,16 +125,19 @@ function openImg(link, name) {
   openPopup(popupImgSection);
 }
 
-initialCards.forEach((item) => {
-  const cardTab = new Card(item.name, item.link, card, openImg);
-  addCard.append(cardTab.renderCard());
+function newCard(title, link, card, openImg) {
+  const newCard = new Card(title, link, card, openImg);
+  addCard.prepend(newCard.renderCard());
+}
+
+initialCards.reverse().forEach((item) => {
+  newCard(item.name, item.link, card, openImg);
 })
 
 //Отправка карточки на страницу
 cardForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const newCard = new Card(cardTitle.value, cardUrl.value, card, openImg);
-  addCard.prepend(newCard.renderCard());
+  newCard(cardTitle.value, cardUrl.value, card, openImg);
   closePopup(popupCard);
 });
 
@@ -142,5 +145,3 @@ allForms.forEach((form) => {
   const formValidate = new FormValidator(config, form);
   formValidate.enableValidation();
 })
-
-
