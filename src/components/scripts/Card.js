@@ -1,9 +1,9 @@
 export class Card {
-  constructor(title, link, selector, openImg) {
-    this._title = title;
-    this._link = link;
+  constructor({ data, handleCardClick }, selector) {
+    this._title = data.title;
+    this._link = data.link;
+    this._handleCardClick = handleCardClick;
     this._selector = selector;
-    this._openImg = openImg;
   }
 
   _like = () => {
@@ -26,7 +26,7 @@ export class Card {
     this._like();
     });
     this._element.querySelector('.elements__img').addEventListener('click', () => {
-      this._openImg(this._link, this._title);
+      this._handleCardClick(this._title, this._link);
     });
 
     return this._element
