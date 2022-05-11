@@ -17,10 +17,11 @@ export class Card {
 
   renderCard = () => {
     this._element = this._selector.cloneNode(true);
+    const imageElement = this._element.querySelector('.elements__img')
     this._elementLike = this._element.querySelector('.elements__like');
-    this._element.querySelector('.elements__img').src = this._link;
     this._element.querySelector('.elements__title').textContent = this._title;
-    this._element.querySelector('.elements__img').alt = this._title;
+    imageElement.src = this._link;
+    imageElement.alt = this._title;
     this._element.querySelector('.elements__trash').addEventListener('click', this._removeCard);
     this._elementLike.addEventListener('click', () => {
     this._like();

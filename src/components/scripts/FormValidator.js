@@ -2,6 +2,8 @@ export class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
+    this._inputList = this._form.querySelectorAll(config.inputSelector);
+    this._submitButton = this._form.querySelector(this._config.submitButton)
   }
 
   _checkInputValidity = (input) => {
@@ -13,20 +15,11 @@ export class FormValidator {
     }
   }
 
-  disableSubmit = () => {
-    this._form.querySelector(this._config.submitButton).classList.add(this._config.submitDisable);
-  }
-
   resetValidation = () => {
-    const submitButton = this._form.querySelector(this._config.submitButton);
-    this._form.querySelectorAll('.popup__error').forEach((item) => {
-      item.textContent = '';
-    })
-    this._form.querySelectorAll('.popup__input').forEach((item) => {
-      item.classList.remove(this._config.inputErrorClass);
-    })
-    submitButton.classList.remove(this._config.submitDisable);
-    submitButton.removeAttribute('disabled', 'disabled');
+    this._setSubmitButtonState();
+    this._inputList.forEach((input) => {
+      this._unsetFieldError(input);
+  });
   }
 
   _setFieldError = (input) => {
@@ -42,21 +35,20 @@ export class FormValidator {
   }
 
   _setSubmitButtonState = () => {
-    const submitButton = this._form.querySelector(this._config.submitButton);
     const isValid = this._form.checkValidity();
 
   if (isValid) {
-    submitButton.classList.remove(this._config.submitDisable);
-    submitButton.removeAttribute('disabled', 'disabled');
+    this._submitButton.classList.remove(this._config.submitDisable);
+    this._submitButton.removeAttribute('disabled', 'disabled');
   } else {
-    submitButton.classList.add(this._config.submitDisable);
-    submitButton.setAttribute('disabled', 'disabled');
+    this._submitButton.classList.add(this._config.submitDisable);
+    this._submitButton.setAttribute('disabled', 'disabled');
   }
   }
 
   enableValidation = () => {
     this._setSubmitButtonState();
-    this._form.querySelectorAll('.popup__input').forEach((input) => {
+      this._inputList.forEach((input) => {
       this._checkInputValidity(input);
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
