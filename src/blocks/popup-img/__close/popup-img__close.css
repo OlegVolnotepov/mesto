@@ -15,7 +15,7 @@
 
 @media (max-width: 530px) {
   .popup-img__close {
-    right: -2%;
-    top: -6%;
+    right: -6px;
+    top: -26px;
   }
 }

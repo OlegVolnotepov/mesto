@@ -49,7 +49,6 @@ export class FormValidator {
   enableValidation = () => {
     this._setSubmitButtonState();
       this._inputList.forEach((input) => {
-      this._checkInputValidity(input);
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
         this._setSubmitButtonState();
