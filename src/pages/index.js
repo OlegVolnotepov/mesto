@@ -73,6 +73,7 @@ allCards.then((data) => {
 getUser
   .then((data) => {
     userInfo.setUserInfo(data);
+    userInfo.setAvatar(data);
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
