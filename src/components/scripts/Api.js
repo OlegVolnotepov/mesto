@@ -4,7 +4,7 @@ export class Api {
     this._headers = config.headers;
 }
 
-  _Response(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -15,7 +15,7 @@ export class Api {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
         })
-        .then(res => this._Response(res));
+        .then(res => this._checkResponse(res));
     }
 
   addNewCard(data) {
@@ -27,14 +27,14 @@ export class Api {
           link: data.link
         })
       })
-        .then(res => this._Response(res));
+        .then(res => this._checkResponse(res));
     }
 
     getUser() {
       return fetch(`${this._url}/users/me`, {
         headers: this._headers
     })
-    .then(res => this._Response(res));
+    .then(res => this._checkResponse(res));
     }
 
     setUserInfo(data) {
@@ -46,7 +46,7 @@ export class Api {
           about: data.about
         })
       })
-        .then(res => this._Response(res));
+        .then(res => this._checkResponse(res));
     }
 
     deleteCard(cardId) {
@@ -54,7 +54,7 @@ export class Api {
         method: 'DELETE',
         headers: this._headers
       })
-      .then(res => this._Response(res));
+      .then(res => this._checkResponse(res));
     }
 
     setLike(cardId) {
@@ -62,7 +62,7 @@ export class Api {
         method: 'PUT',
         headers: this._headers
       })
-      .then(res => this._Response(res));
+      .then(res => this._checkResponse(res));
     }
 
     unSetLike(cardId) {
@@ -70,7 +70,7 @@ export class Api {
         method: 'DELETE',
         headers: this._headers
       })
-      .then(res => this._Response(res));
+      .then(res => this._checkResponse(res));
     }
 
     updateAvatar(data) {
@@ -81,7 +81,7 @@ export class Api {
           avatar: data.link
         })
       })
-        .then(res => this._Response(res));
+        .then(res => this._checkResponse(res));
     }
 
 

@@ -15,18 +15,6 @@ export class Card {
     this._likeButton = this._selector.querySelector('.elements__like');
   }
 
-  // поставить/удалить лайк
-  handleLikeCard(data) {
-    this._likes = data.likes;
-    this._elementLike.classList.toggle('elements__like_active');
-
-    if (!this._elementLike.classList.contains('elements__like_active')) {
-      this._elementLikeCounter.textContent = this._elementLikeCounter.textContent - 1;
-    } else {
-      this._elementLikeCounter.textContent = this._likes.length + 1;
-    }
-  }
-
   _checkIsliked(element) {
     if (element.length > 0) {
       element.map((item) => {
@@ -35,18 +23,6 @@ export class Card {
         }
       })
     }
-  }
-
-  _like = () => {
-    this._elementLike.classList.toggle('elements__like_active');
-  }
-
-  likeCount() {
-    this._element.querySelector('.elements__like-counter').textContent = this._likeCouter + 1
-  }
-
-  likeUnCount() {
-    this._element.querySelector('.elements__like-counter').textContent = this._likeCouter - 1
   }
 
   _checkOwnerCard(id, element) {
@@ -60,15 +36,29 @@ export class Card {
     this._element = null;
   }
 
-  //TODO убирать счетчик без перезагрузки страницы
+  _likeSwitcher() {
+    if (!this._elementLike.classList.contains("elements__like_active")) {
+      this._handleSetLike(this._cardId)
+        .then((res) => {
+          this._data = res;
+          this._elementLikeCounter.textContent = res.likes.length;
+          this._elementLike.classList.add("elements__like_active");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      this._handleUnSetLike(this._cardId)
+        .then((res) => {
+          this._data = res;
+          this._elementLikeCounter.textContent = res.likes.length;
+          this._elementLike.classList.remove("elements__like_active");
+        })
+        .catch((err) => console.log(err));
+    }
+  }
 
   _setEventListeners() {
-    this._elementLike.addEventListener('click', () => {
-      if (this._elementLike.classList.contains('elements__like_active')) {
-        this._handleUnSetLike(this._cardId);
-      } else {
-        this._handleSetLike(this._cardId);
-      }
+    this._elementLike.addEventListener("click", () => {
+      this._likeSwitcher();
     });
 
     this._element.querySelector('.elements__img').addEventListener('click', () => {
@@ -78,7 +68,6 @@ export class Card {
     this._element.querySelector('.elements__trash').addEventListener('click', () => {
       this._handeDeleteCardIcon(this._cardId);
     });
-
   }
 
   renderCard = () => {
@@ -91,13 +80,10 @@ export class Card {
     this._likesNumber.textContent = this._likeCouter;
     imageElement.src = this._link;
     imageElement.alt = this._title;
-
-    //TODO: сделать проверку лайкнуто ли, если да - ставим -1 , удаляем лайк. Метод _checkIsliked заменить
-
     this._checkOwnerCard(this._id, this._element)
     this._checkIsliked(this._isLiked)
-
     this._setEventListeners();
+
     return this._element
   }
 }
