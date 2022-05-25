@@ -10,9 +10,11 @@ export class Card {
     this._selector = selector;
     this._id = data.id;
     this._myId = myId;
-    this._cardId = data.cardId;
+    this._cardId = data._id;
     this._isLiked = data.likes;
     this._likeButton = this._selector.querySelector('.elements__like');
+    this._id2= data._id
+
   }
 
   _checkIsliked(element) {

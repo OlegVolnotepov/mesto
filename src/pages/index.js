@@ -33,7 +33,7 @@ const profileValidate = new FormValidator(config, profileForm);
 const formValidate = new FormValidator(config, cardForm);
 const avatarValidate = new FormValidator(config, avatarForm);
 const imagePopup = new PopupWithImage('.popup-img');
-const myId = 'fc356f4405f733098454fe93';
+let myId
 
 imagePopup.setEventListeners();
 formValidate.enableValidation();
@@ -52,12 +52,14 @@ const initialCards2 = []
 
 Promise.all([api.getAllCards(), api.getUser()])
   .then(([cards, data]) => {
+    myId = data._id;
     cards.map((item) => initialCards2.unshift({
       name: item.name,
       link: item.link,
       likes:item.likes,
       id: item.owner._id,
-      cardId: item._id
+      //cardId: item._id
+      _id: item._id
     }));
     cardsList.renderItems();
     userInfo.setUserInfo(data);
@@ -89,8 +91,7 @@ const createCard = (data) => {
   },
   handleUnSetLike: (cardId) => {
     return api.unSetLike(cardId);
-  }}
-  , card, myId)
+  }}, card, myId)
   const cardElement = cardItem.renderCard();
   return cardElement;
 }
@@ -190,3 +191,4 @@ const deletePopup = new PopupDeleteCard({
 }, '.popup-remove-card__form');
 deletePopup.setEventListeners();
 
+console.log(myId)
